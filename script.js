@@ -40,22 +40,23 @@ const imagesGallery = [
       "Colombia ipsum, dolor sit amet consectetur adipisicing elit. Et temporibus voluptatum suscipit tempore aliquid deleniti aut veniam.",
   },
 ];
+
 const description = document.querySelector(".description");
 //Crea HTML immagini
 let image = "";
 let title = "";
 let caption = "";
+
+const prevBtn = document.getElementById("prev");
+const nextBtn = document.getElementById("next");
+const gallery = document.querySelector(".gallery");
+const thumbnails = document.querySelector(".thumbnails");
+
 for (let i = 0; i < imagesGallery.length; i++) {
   image += `<img src=${imagesGallery[i].url}  alt = "${imagesGallery[i].title}"/>`;
   title += `<h2 id="img-title" class="title">${imagesGallery[i].title}</h2>`;
   caption += `<p id="img-caption" class="caption">${imagesGallery[i].description}</p>`;
 }
-
-//Buttons
-const prevBtn = document.getElementById("prev");
-const nextBtn = document.getElementById("next");
-const gallery = document.querySelector(".gallery");
-const thumbnails = document.querySelector(".thumbnails");
 
 //Aggiunge immagini nell HTML
 gallery.innerHTML = image;
@@ -66,9 +67,22 @@ description.innerHTML = title + caption;
 const images = document.querySelectorAll(".gallery img");
 const titles = document.querySelectorAll(".title");
 const captions = document.querySelectorAll(".caption");
-console.log(captions);
 const thumbnailsImages = document.querySelectorAll(".thumbnails img");
 
+for (let i = 0; i < thumbnailsImages.length; i++) {
+  thumbnailsImages[i].addEventListener("click", (e) => {
+    for (let j = 0; j < thumbnailsImages.length; j++) {
+      thumbnailsImages[j].classList.remove("selected");
+      images[j].classList.remove("d-block");
+      titles[j].classList.remove("d-block");
+      captions[j].classList.remove("d-block");
+    }
+    e.target.classList.add("selected");
+    images[i].classList.add("d-block");
+    titles[i].classList.add("d-block");
+    captions[i].classList.add("d-block");
+  });
+}
 //Active index
 let currentActiveIndex = 0;
 

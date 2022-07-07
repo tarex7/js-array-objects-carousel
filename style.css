@@ -8,6 +8,8 @@ img {
 }
 .carousel {
   position: relative;
+  display: flex;
+  justify-content: center;
 }
 
 .carousel .gallery {
@@ -69,8 +71,9 @@ img {
   position: absolute;
   top: 0;
   color: #000;
-
+  margin: 0 auto;
   height: 100%;
+  width: 80%;
   padding: 10px 40px;
   text-align: center;
 }
