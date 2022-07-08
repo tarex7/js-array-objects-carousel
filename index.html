@@ -23,20 +23,31 @@
   </head>
   <body class="bg-dark">
     <div class="container">
-      <div class="carousel my-5">
-        <!-- PREV button -->
-        <i id="prev" class="fa-solid fa-chevron-left"></i>
-        <!-- Galley images -->
-        <div class="gallery"></div>
-        <div class="description"></div>
+      <div class="row">
+        <div class="col-12">
+          <div class="carousel my-5">
+            <!-- PREV button -->
+            <i id="prev" class="fa-solid fa-chevron-left"></i>
+            <!-- Galley images -->
+            <div class="gallery"></div>
+            <div class="description"></div>
 
-        <!-- NEXT button -->
-        <i id="next" class="fa-solid fa-chevron-right"></i>
+            <!-- NEXT button -->
+            <i id="next" class="fa-solid fa-chevron-right"></i>
+          </div>
+        </div>
+        <div class="col-12 buttons d-flex justify-content-center">
+          <div id="backwards" class="btn btn-primary mx-5">prev</div>
+          <div id="stopBtn" class="btn btn-primary mx-5">STOP</div>
+          <div id="forwards" class="btn btn-primary mx-5">next</div>
+        </div>
+        <div class="col-12">
+          <!-- Thumbnails -->
+          <div class="row g-2 thumbnails my-3"></div>
+        </div>
       </div>
-      <!-- Thumbnails -->
-
-      <div class="row g-2 thumbnails my-3"></div>
     </div>
+
     <script src="script.js"></script>
   </body>
 </html>

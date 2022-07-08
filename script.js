@@ -49,8 +49,12 @@ let caption = "";
 
 const prevBtn = document.getElementById("prev");
 const nextBtn = document.getElementById("next");
+const forwardsBtn = document.getElementById("forwards");
+const backwardsBtn = document.getElementById("backwards");
+const stopBtn = document.getElementById("stopBtn");
 const gallery = document.querySelector(".gallery");
 const thumbnails = document.querySelector(".thumbnails");
+let playing = true;
 
 for (let i = 0; i < imagesGallery.length; i++) {
   image += `<img src=${imagesGallery[i].url}  alt = "${imagesGallery[i].title}"/>`;
@@ -93,27 +97,9 @@ captions[currentActiveIndex].classList.add("d-block");
 //Seleziona anterprima
 thumbnailsImages[currentActiveIndex].classList.add("selected");
 
-//Pulsante PREV
-prevBtn.addEventListener("click", function () {
-  images[currentActiveIndex].classList.remove("d-block");
-  titles[currentActiveIndex].classList.remove("d-block");
-  captions[currentActiveIndex].classList.remove("d-block");
 
-  thumbnailsImages[currentActiveIndex].classList.remove("selected");
 
-  currentActiveIndex--;
-
-  if (currentActiveIndex < 0) currentActiveIndex = images.length - 1;
-
-  images[currentActiveIndex].classList.add("d-block");
-  titles[currentActiveIndex].classList.add("d-block");
-  captions[currentActiveIndex].classList.add("d-block");
-
-  thumbnailsImages[currentActiveIndex].classList.add("selected");
-});
-
-//Pulsante NEXT
-nextBtn.addEventListener("click", function () {
+const navigateGalleryForward = () => {
   images[currentActiveIndex].classList.remove("d-block");
   titles[currentActiveIndex].classList.remove("d-block");
   captions[currentActiveIndex].classList.remove("d-block");
@@ -129,4 +115,50 @@ nextBtn.addEventListener("click", function () {
   captions[currentActiveIndex].classList.add("d-block");
 
   thumbnailsImages[currentActiveIndex].classList.add("selected");
+  console.log("tic");
+};
+const navigateGalleryward = () => {
+  images[currentActiveIndex].classList.remove("d-block");
+  titles[currentActiveIndex].classList.remove("d-block");
+  captions[currentActiveIndex].classList.remove("d-block");
+
+  thumbnailsImages[currentActiveIndex].classList.remove("selected");
+
+  currentActiveIndex++;
+
+  if (currentActiveIndex === images.length) currentActiveIndex = 0;
+
+  images[currentActiveIndex].classList.add("d-block");
+  titles[currentActiveIndex].classList.add("d-block");
+  captions[currentActiveIndex].classList.add("d-block");
+
+  thumbnailsImages[currentActiveIndex].classList.add("selected");
+  console.log("tic");
+};
+
+//Pulsante NEXT
+nextBtn.addEventListener("click", navigateGalleryForward);
+console.log(playing);
+//Pulsante PREV
+prevBtn.addEventListener("click", navigateGalleryward);
+
+//Start/Stop button
+stopBtn.addEventListener("click", () => {
+  if (playing) {
+    clearInterval(autoPlay);
+    playing = false;
+    stopBtn.innerText = "START";
+    console.log("Ora playing è ", playing);
+  } else {
+    setInterval(navigateGalleryForward, 1000);
+    playing = true;
+    stopBtn.innerText = "STOP";
+    console.log(" playing è ", playing);
+  }
 });
+
+backwardsBtn.addEventListener("click",()=>{
+clearInterval(autoplay)
+})
+console.log(playing);
+const autoPlay = setInterval(navigateGalleryForward, 1000);
